@@ -1,0 +1,43 @@
+{
+  "name": "@hanen-shop/mobile",
+  "version": "0.1.0",
+  "main": "index.ts",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "typecheck": "tsc --noEmit",
+    "test": "echo 'No tests configured for mobile v1'",
+    "lint": "echo 'No linter configured for mobile v1'",
+    "clean": "rm -rf .expo"
+  },
+  "dependencies": {
+    "@hanen-shop/api-client": "workspace:*",
+    "@hanen-shop/shared-types": "workspace:*",
+    "@react-native-community/netinfo": "11.4.1",
+    "@react-navigation/bottom-tabs": "^7.3.0",
+    "@react-navigation/native": "^7.1.0",
+    "@react-navigation/stack": "^7.2.0",
+    "@shopify/flash-list": "^1.7.0",
+    "@tanstack/react-query": "^5.60.0",
+    "axios": "^1.7.0",
+    "expo": "~54.0.33",
+    "expo-constants": "~17.1.6",
+    "expo-haptics": "~15.0.8",
+    "expo-status-bar": "~3.0.9",
+    "react": "19.1.0",
+    "react-hook-form": "^7.54.0",
+    "react-native": "0.81.5",
+    "react-native-paper": "^5.13.0",
+    "react-native-safe-area-context": "^5.4.0",
+    "react-native-screens": "~4.10.0",
+    "react-native-vector-icons": "^10.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "~19.1.0",
+    "@types/react-native-vector-icons": "^6.4.18",
+    "typescript": "~5.9.2"
+  },
+  "private": true
+}

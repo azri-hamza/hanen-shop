@@ -1,0 +1,28 @@
+{
+  "name": "hanen-shop",
+  "private": true,
+  "description": "Inventory & customer ledger system",
+  "scripts": {
+    "dev": "turbo dev",
+    "dev:api": "pnpm run dev --filter=@hanen-shop/api",
+    "dev:web": "pnpm run dev --filter=@hanen-shop/web",
+    "dev:mobile": "pnpm run dev --filter=@hanen-shop/mobile",
+    "dev:all": "turbo dev",
+    "build": "turbo build",
+    "build:all": "turbo build",
+    "test": "turbo test",
+    "test:all": "turbo test",
+    "lint": "turbo lint",
+    "lint:all": "turbo lint",
+    "clean": "turbo clean",
+    "typecheck": "turbo typecheck"
+  },
+  "devDependencies": {
+    "turbo": "^2.5.0",
+    "typescript": "^5.8.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "packageManager": "pnpm@9.0.0"
+}
