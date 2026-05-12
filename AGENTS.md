@@ -13,6 +13,23 @@ Full-stack monorepo for a shop management application (inventory + customer ledg
 - Workspace protocol: always use `"workspace:*"` (not bare `"*"`) for inter-package deps
 - Engine requirement: Node >= 20
 
+## ⚠️ Critical: pnpm Workspace Commands
+When running scripts in a specific workspace package, **always use `--filter`** (NOT `--workspace`):
+
+```bash
+# ✅ CORRECT - pnpm's native filter flag
+pnpm --filter @hanen-shop/api migration:run
+pnpm --filter @hanen-shop/web dev
+pnpm --filter @hanen-shop/mobile start
+
+# ❌ WRONG - --workspace is npm syntax, NOT supported by pnpm
+pnpm run migration:run --workspace=@hanen-shop/api  # Will fail!
+
+# ✅ Alternative approaches
+pnpm --filter "./apps/api" migration:run           # By path
+pnpm --dir apps/api migration:run                  # Using --dir flag
+cd apps/api && pnpm run migration:run              # Navigate first
+
 ## Project Structure
 ```
 apps/api/          — NestJS backend
