@@ -23,9 +23,17 @@ import { ToastService } from '../../core/services/toast.service';
   selector: 'app-product-list',
   standalone: true,
   imports: [
-    RouterLink, MatTableModule, MatButtonModule, MatIconModule,
-    MatInputModule, MatSelectModule, MatFormFieldModule, MatProgressBarModule,
-    DecimalPipe, PageHeaderComponent, EmptyStateComponent,
+    RouterLink,
+    MatTableModule,
+    MatButtonModule,
+    MatIconModule,
+    MatInputModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatProgressBarModule,
+    DecimalPipe,
+    PageHeaderComponent,
+    EmptyStateComponent,
   ],
   template: `
     <app-page-header title="Products">
@@ -37,7 +45,11 @@ import { ToastService } from '../../core/services/toast.service';
     <div style="display: flex; gap: 16px; margin-bottom: 16px;">
       <mat-form-field appearance="outline" style="flex: 1;">
         <mat-label>Search products</mat-label>
-        <input matInput (input)="onSearch($any($event.target).value)" placeholder="Search by name...">
+        <input
+          matInput
+          (input)="onSearch($any($event.target).value)"
+          placeholder="Search by name..."
+        />
         <mat-icon matSuffix>search</mat-icon>
       </mat-form-field>
 
@@ -55,12 +67,22 @@ import { ToastService } from '../../core/services/toast.service';
     @if (store.loading()) {
       <mat-progress-bar mode="indeterminate" style="margin-bottom: 16px;" />
       <div style="padding: 16px;">
-        @for (_ of [1,2,3,4,5]; track _) {
-          <div style="display: flex; gap: 16px; padding: 12px 0; border-bottom: 1px solid #eee;">
-            <div style="flex: 2; height: 16px; background: #e0e0e0; border-radius: 4px; animation: pulse 1.5s infinite;"></div>
-            <div style="flex: 1; height: 16px; background: #e0e0e0; border-radius: 4px; animation: pulse 1.5s infinite;"></div>
-            <div style="flex: 1; height: 16px; background: #e0e0e0; border-radius: 4px; animation: pulse 1.5s infinite;"></div>
-            <div style="flex: 0.5; height: 16px; background: #e0e0e0; border-radius: 4px; animation: pulse 1.5s infinite;"></div>
+        @for (_ of [1, 2, 3, 4, 5]; track _) {
+          <div
+            style="display: flex; gap: 16px; padding: 12px 0; border-bottom: 1px solid #eee;"
+          >
+            <div
+              style="flex: 2; height: 16px; background: #e0e0e0; border-radius: 4px; animation: pulse 1.5s infinite;"
+            ></div>
+            <div
+              style="flex: 1; height: 16px; background: #e0e0e0; border-radius: 4px; animation: pulse 1.5s infinite;"
+            ></div>
+            <div
+              style="flex: 1; height: 16px; background: #e0e0e0; border-radius: 4px; animation: pulse 1.5s infinite;"
+            ></div>
+            <div
+              style="flex: 0.5; height: 16px; background: #e0e0e0; border-radius: 4px; animation: pulse 1.5s infinite;"
+            ></div>
           </div>
         }
       </div>
@@ -80,7 +102,9 @@ import { ToastService } from '../../core/services/toast.service';
 
         <ng-container matColumnDef="price">
           <mat-header-cell *matHeaderCellDef>Price</mat-header-cell>
-          <mat-cell *matCellDef="let p">{{ p.price | number:'1.2-2' }}</mat-cell>
+          <mat-cell *matCellDef="let p">{{
+            p.price | number: '1.3-3'
+          }}</mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="unit">
@@ -93,7 +117,8 @@ import { ToastService } from '../../core/services/toast.service';
           <mat-cell *matCellDef="let p">
             <span
               [style.background]="stockColor(p.stockQuantity)"
-              style="padding: 2px 8px; border-radius: 4px; color: white; font-weight: 500;">
+              style="padding: 2px 8px; border-radius: 4px; color: white; font-weight: 500;"
+            >
               {{ p.stockQuantity }}
             </span>
           </mat-cell>
@@ -102,26 +127,41 @@ import { ToastService } from '../../core/services/toast.service';
         <ng-container matColumnDef="actions">
           <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
           <mat-cell *matCellDef="let p">
-            <button mat-icon-button [routerLink]="['/products', p.id, 'edit']" matTooltip="Edit">
+            <button
+              mat-icon-button
+              [routerLink]="['/products', p.id, 'edit']"
+              matTooltip="Edit"
+            >
               <mat-icon>edit</mat-icon>
             </button>
-            <button mat-icon-button (click)="openStockDialog(p)" matTooltip="Adjust Stock">
+            <button
+              mat-icon-button
+              (click)="openStockDialog(p)"
+              matTooltip="Adjust Stock"
+            >
               <mat-icon>inventory</mat-icon>
             </button>
           </mat-cell>
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns" />
-        <mat-row *matRowDef="let row; columns: displayedColumns;" />
+        <mat-row *matRowDef="let row; columns: displayedColumns" />
       </mat-table>
     }
   `,
-  styles: [`
-    @keyframes pulse {
-      0%, 100% { opacity: 0.4; }
-      50% { opacity: 1; }
-    }
-  `],
+  styles: [
+    `
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 0.4;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
+    `,
+  ],
 })
 export class ProductListComponent implements OnInit {
   protected readonly store = inject(ProductsStore);
@@ -130,18 +170,30 @@ export class ProductListComponent implements OnInit {
   private readonly title = inject(Title);
   private readonly searchSubject = new Subject<string>();
 
-  protected displayedColumns = ['name', 'category', 'price', 'unit', 'stock', 'actions'];
+  protected displayedColumns = [
+    'name',
+    'category',
+    'price',
+    'unit',
+    'stock',
+    'actions',
+  ];
 
   protected categories = signal<string[]>([]);
 
   constructor() {
-    this.searchSubject.pipe(
-      debounceTime(300),
-      distinctUntilChanged(),
-      takeUntilDestroyed(inject(DestroyRef)),
-    ).subscribe((query) => {
-      this.store.loadProducts(query || undefined, this.store.categoryFilter() || undefined);
-    });
+    this.searchSubject
+      .pipe(
+        debounceTime(300),
+        distinctUntilChanged(),
+        takeUntilDestroyed(inject(DestroyRef)),
+      )
+      .subscribe((query) => {
+        this.store.loadProducts(
+          query || undefined,
+          this.store.categoryFilter() || undefined,
+        );
+      });
   }
 
   ngOnInit() {
@@ -154,7 +206,10 @@ export class ProductListComponent implements OnInit {
   }
 
   onCategoryChange(category: string) {
-    this.store.loadProducts(this.store.searchQuery() || undefined, category || undefined);
+    this.store.loadProducts(
+      this.store.searchQuery() || undefined,
+      category || undefined,
+    );
   }
 
   stockColor(qty: number): string {
@@ -164,18 +219,24 @@ export class ProductListComponent implements OnInit {
   }
 
   openStockDialog(product: IProduct) {
-    const qty = prompt(`Adjust stock for "${product.name}":\nEnter +N to add or -N to remove`, '0');
+    const qty = prompt(
+      `Adjust stock for "${product.name}":\nEnter +N to add or -N to remove`,
+      '0',
+    );
     if (qty === null) return;
 
     const num = parseInt(qty, 10);
     if (isNaN(num) || num === 0) return;
 
-    const operation = num > 0 ? 'increment' as const : 'decrement' as const;
+    const operation = num > 0 ? ('increment' as const) : ('decrement' as const);
 
-    this.store.adjustStock(product.id, { quantity: Math.abs(num), operation }).then(() => {
-      this.toast.success(`Stock updated for "${product.name}"`);
-    }).catch(() => {
-      this.toast.error(`Failed to adjust stock for "${product.name}"`);
-    });
+    this.store
+      .adjustStock(product.id, { quantity: Math.abs(num), operation })
+      .then(() => {
+        this.toast.success(`Stock updated for "${product.name}"`);
+      })
+      .catch(() => {
+        this.toast.error(`Failed to adjust stock for "${product.name}"`);
+      });
   }
 }

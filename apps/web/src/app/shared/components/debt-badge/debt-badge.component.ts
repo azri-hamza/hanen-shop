@@ -8,7 +8,7 @@ import { MatChipsModule } from '@angular/material/chips';
   imports: [MatChipsModule, DecimalPipe],
   template: `
     <mat-chip [color]="color()" highlighted="false">
-      {{ value | number:'1.2-2' }}
+      {{ value | number: '1.3-3' }}
     </mat-chip>
   `,
 })

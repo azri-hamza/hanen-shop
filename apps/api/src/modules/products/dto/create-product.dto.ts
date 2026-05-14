@@ -13,7 +13,7 @@ export class CreateProductDto {
   name: string;
 
   @ApiProperty()
-  @IsNumber({ maxDecimalPlaces: 2 })
+  @IsNumber({ maxDecimalPlaces: 3 })
   @IsPositive()
   price: number;
 

@@ -17,7 +17,7 @@ export class Product {
   @Column({
     type: 'decimal',
     precision: 10,
-    scale: 2,
+    scale: 3,
     nullable: false,
     transformer: {
       to: (value: number) => value,

@@ -23,9 +23,18 @@ interface TransactionWithBalance extends ITransaction {
   selector: 'app-customer-detail',
   standalone: true,
   imports: [
-    RouterLink, DatePipe, DecimalPipe, MatButtonModule, MatIconModule,
-    MatCardModule, MatChipsModule, MatExpansionModule, MatDividerModule,
-    MatProgressBarModule, PageHeaderComponent, EmptyStateComponent,
+    RouterLink,
+    DatePipe,
+    DecimalPipe,
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule,
+    MatChipsModule,
+    MatExpansionModule,
+    MatDividerModule,
+    MatProgressBarModule,
+    PageHeaderComponent,
+    EmptyStateComponent,
   ],
   template: `
     @if (store.loading()) {
@@ -34,12 +43,20 @@ interface TransactionWithBalance extends ITransaction {
         <mat-card-content>
           <div style="display: flex; gap: 24px;">
             <div style="flex: 1;">
-              <div style="height: 14px; width: 40px; background: #e0e0e0; border-radius: 4px; margin-bottom: 8px; animation: pulse 1.5s infinite;"></div>
-              <div style="height: 20px; width: 120px; background: #e0e0e0; border-radius: 4px; animation: pulse 1.5s infinite;"></div>
+              <div
+                style="height: 14px; width: 40px; background: #e0e0e0; border-radius: 4px; margin-bottom: 8px; animation: pulse 1.5s infinite;"
+              ></div>
+              <div
+                style="height: 20px; width: 120px; background: #e0e0e0; border-radius: 4px; animation: pulse 1.5s infinite;"
+              ></div>
             </div>
             <div style="flex: 1;">
-              <div style="height: 14px; width: 80px; background: #e0e0e0; border-radius: 4px; margin-bottom: 8px; animation: pulse 1.5s infinite;"></div>
-              <div style="height: 28px; width: 100px; background: #e0e0e0; border-radius: 4px; animation: pulse 1.5s infinite;"></div>
+              <div
+                style="height: 14px; width: 80px; background: #e0e0e0; border-radius: 4px; margin-bottom: 8px; animation: pulse 1.5s infinite;"
+              ></div>
+              <div
+                style="height: 28px; width: 100px; background: #e0e0e0; border-radius: 4px; animation: pulse 1.5s infinite;"
+              ></div>
             </div>
           </div>
         </mat-card-content>
@@ -54,19 +71,35 @@ interface TransactionWithBalance extends ITransaction {
           <div style="display: flex; align-items: center; gap: 24px;">
             <div>
               <p style="margin: 0; color: #666;">Phone</p>
-              <p style="margin: 4px 0; font-size: 18px;">{{ customer().phone || '—' }}</p>
+              <p style="margin: 4px 0; font-size: 18px;">
+                {{ customer().phone || '—' }}
+              </p>
             </div>
             <div>
               <p style="margin: 0; color: #666;">Total Debt</p>
-              <p style="margin: 4px 0; font-size: 28px; font-weight: 500; color: {{ debtColor(customer().totalDebt) }};">
-                {{ customer().totalDebt | number:'1.2-2' }}
+              <p
+                style="margin: 4px 0; font-size: 28px; font-weight: 500; color: {{
+                  debtColor(customer().totalDebt)
+                }};"
+              >
+                {{ customer().totalDebt | number: '1.3-3' }}
               </p>
             </div>
             <div style="margin-left: auto; display: flex; gap: 12px;">
-              <button mat-raised-button color="primary" [routerLink]="['/transactions/sale']" [queryParams]="{ customerId: customer().id }">
+              <button
+                mat-raised-button
+                color="primary"
+                [routerLink]="['/transactions/sale']"
+                [queryParams]="{ customerId: customer().id }"
+              >
                 <mat-icon>point_of_sale</mat-icon> Record Sale
               </button>
-              <button mat-raised-button color="accent" [routerLink]="['/transactions/payment']" [queryParams]="{ customerId: customer().id }">
+              <button
+                mat-raised-button
+                color="accent"
+                [routerLink]="['/transactions/payment']"
+                [queryParams]="{ customerId: customer().id }"
+              >
                 <mat-icon>payments</mat-icon> Record Payment
               </button>
             </div>
@@ -84,30 +117,52 @@ interface TransactionWithBalance extends ITransaction {
             <mat-card-content>
               <div style="display: flex; align-items: center; gap: 16px;">
                 <span style="min-width: 80px; color: #666; font-size: 13px;">
-                  {{ tx.createdAt | date:'shortDate' }}
+                  {{ tx.createdAt | date: 'shortDate' }}
                 </span>
-                <mat-chip [color]="tx.type === 'SALE' ? 'primary' : 'accent'" style="min-width: 72px; justify-content: center;">
+                <mat-chip
+                  [color]="tx.type === 'SALE' ? 'primary' : 'accent'"
+                  style="min-width: 72px; justify-content: center;"
+                >
                   {{ tx.type }}
                 </mat-chip>
-                <span style="flex: 1; font-weight: 500;">{{ tx.amount | number:'1.2-2' }}</span>
+                <span style="flex: 1; font-weight: 500;">{{
+                  tx.amount | number: '1.3-3'
+                }}</span>
                 <span style="color: #666; flex: 1;">{{ tx.note || '' }}</span>
-                <span style="font-weight: 500; color: {{ debtColor(tx.runningBalance) }}">
-                  {{ tx.runningBalance | number:'1.2-2' }}
+                <span
+                  style="font-weight: 500; color: {{
+                    debtColor(tx.runningBalance)
+                  }}"
+                >
+                  {{ tx.runningBalance | number: '1.3-3' }}
                 </span>
 
                 @if (tx.type === 'SALE' && tx.items?.length) {
                   <button mat-icon-button (click)="toggleExpand(tx.id)">
-                    <mat-icon>{{ expandedIds().has(tx.id) ? 'expand_less' : 'expand_more' }}</mat-icon>
+                    <mat-icon>{{
+                      expandedIds().has(tx.id) ? 'expand_less' : 'expand_more'
+                    }}</mat-icon>
                   </button>
                 }
               </div>
 
-              @if (tx.type === 'SALE' && tx.items?.length && expandedIds().has(tx.id)) {
-                <div style="margin: 12px 0 0 166px; padding: 12px; background: #f5f5f5; border-radius: 8px;">
+              @if (
+                tx.type === 'SALE' &&
+                tx.items?.length &&
+                expandedIds().has(tx.id)
+              ) {
+                <div
+                  style="margin: 12px 0 0 166px; padding: 12px; background: #f5f5f5; border-radius: 8px;"
+                >
                   @for (item of tx.items; track item.id) {
-                    <div style="display: flex; justify-content: space-between; padding: 4px 0;">
+                    <div
+                      style="display: flex; justify-content: space-between; padding: 4px 0;"
+                    >
                       <span>{{ item.productId }}</span>
-                      <span>{{ item.quantity }} × {{ item.unitPrice | number:'1.2-2' }}</span>
+                      <span
+                        >{{ item.quantity }} ×
+                        {{ item.unitPrice | number: '1.3-3' }}</span
+                      >
                     </div>
                   }
                 </div>
@@ -120,12 +175,19 @@ interface TransactionWithBalance extends ITransaction {
       }
     }
   `,
-  styles: [`
-    @keyframes pulse {
-      0%, 100% { opacity: 0.4; }
-      50% { opacity: 1; }
-    }
-  `],
+  styles: [
+    `
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 0.4;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
+    `,
+  ],
 })
 export class CustomerDetailComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);
@@ -141,10 +203,15 @@ export class CustomerDetailComponent implements OnInit {
     const txs = this.ledger() as TransactionWithBalance[];
     const chronological = [...txs].reverse();
     let balance = 0;
-    return chronological.map((tx) => ({
-      ...tx,
-      runningBalance: (balance += tx.type === TransactionType.SALE ? Number(tx.amount) : -Number(tx.amount)),
-    })).reverse();
+    return chronological
+      .map((tx) => ({
+        ...tx,
+        runningBalance: (balance +=
+          tx.type === TransactionType.SALE
+            ? Number(tx.amount)
+            : -Number(tx.amount)),
+      }))
+      .reverse();
   });
 
   constructor() {

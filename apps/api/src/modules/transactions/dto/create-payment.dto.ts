@@ -13,7 +13,7 @@ export class CreatePaymentDto {
   customerId: string;
 
   @ApiProperty()
-  @IsNumber({ maxDecimalPlaces: 2 })
+  @IsNumber({ maxDecimalPlaces: 3 })
   @IsPositive()
   amount: number;
 

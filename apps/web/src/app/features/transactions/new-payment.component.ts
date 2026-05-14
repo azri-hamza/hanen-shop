@@ -21,9 +21,17 @@ import { ToastService } from '../../core/services/toast.service';
   selector: 'app-new-payment',
   standalone: true,
   imports: [
-    RouterLink, FormsModule, DecimalPipe, MatButtonModule, MatIconModule,
-    MatInputModule, MatFormFieldModule, MatAutocompleteModule, MatCardModule,
-    MatChipsModule, PageHeaderComponent,
+    RouterLink,
+    FormsModule,
+    DecimalPipe,
+    MatButtonModule,
+    MatIconModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatAutocompleteModule,
+    MatCardModule,
+    MatChipsModule,
+    PageHeaderComponent,
   ],
   template: `
     <app-page-header title="New Payment">
@@ -34,13 +42,21 @@ import { ToastService } from '../../core/services/toast.service';
       <mat-card-content>
         <mat-form-field appearance="outline" class="full-width mb-2">
           <mat-label>Search customer</mat-label>
-          <input matInput [matAutocomplete]="auto" [(ngModel)]="customerSearch" (ngModelChange)="onSearch($event)">
+          <input
+            matInput
+            [matAutocomplete]="auto"
+            [(ngModel)]="customerSearch"
+            (ngModelChange)="onSearch($event)"
+          />
         </mat-form-field>
 
-        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelect($event.option.value)">
+        <mat-autocomplete
+          #auto="matAutocomplete"
+          (optionSelected)="onSelect($event.option.value)"
+        >
           @for (c of filteredCustomers(); track c.id) {
             <mat-option [value]="c">
-              {{ c.name }} ({{ c.totalDebt | number:'1.2-2' }})
+              {{ c.name }} ({{ c.totalDebt | number: '1.3-3' }})
             </mat-option>
           }
         </mat-autocomplete>
@@ -49,15 +65,26 @@ import { ToastService } from '../../core/services/toast.service';
           <mat-card style="background: #f5f5f5; margin-bottom: 16px;">
             <mat-card-content style="text-align: center;">
               <p style="margin: 0; color: #666;">{{ customer.name }}</p>
-              <p style="margin: 8px 0 0; font-size: 28px; font-weight: 500; color: {{ debtColor() }};">
-                Current Balance: {{ customer.totalDebt | number:'1.2-2' }}
+              <p
+                style="margin: 8px 0 0; font-size: 28px; font-weight: 500; color: {{
+                  debtColor()
+                }};"
+              >
+                Current Balance: {{ customer.totalDebt | number: '1.3-3' }}
               </p>
             </mat-card-content>
           </mat-card>
 
           <mat-form-field appearance="outline" class="full-width mb-2">
             <mat-label>Amount</mat-label>
-            <input matInput type="number" [(ngModel)]="amount" placeholder="0.00" min="0.01" [max]="customer.totalDebt">
+            <input
+              matInput
+              type="number"
+              [(ngModel)]="amount"
+              placeholder="0.00"
+              min="0.01"
+              [max]="customer.totalDebt"
+            />
             @if (amount > 0 && amount > customer.totalDebt) {
               <mat-error>Amount cannot exceed current balance</mat-error>
             }
@@ -65,12 +92,21 @@ import { ToastService } from '../../core/services/toast.service';
 
           <mat-form-field appearance="outline" class="full-width mb-2">
             <mat-label>Note (optional)</mat-label>
-            <input matInput [(ngModel)]="note" placeholder="Payment note">
+            <input matInput [(ngModel)]="note" placeholder="Payment note" />
           </mat-form-field>
 
-          <button mat-raised-button color="primary" style="width: 100%; padding: 8px;"
-            [disabled]="!amount || amount <= 0 || amount > customer.totalDebt || submitting()"
-            (click)="onSubmit()">
+          <button
+            mat-raised-button
+            color="primary"
+            style="width: 100%; padding: 8px;"
+            [disabled]="
+              !amount ||
+              amount <= 0 ||
+              amount > customer.totalDebt ||
+              submitting()
+            "
+            (click)="onSubmit()"
+          >
             {{ submitting() ? 'Processing...' : 'Record Payment' }}
           </button>
         }
@@ -107,11 +143,17 @@ export class NewPaymentComponent implements OnInit {
   });
 
   constructor() {
-    this.search$.pipe(
-      debounceTime(300), distinctUntilChanged(), takeUntilDestroyed(inject(DestroyRef)),
-    ).subscribe((q) => {
-      this.api.customers.getAll({ search: q || undefined }).then((r) => this.customers.set(r.data));
-    });
+    this.search$
+      .pipe(
+        debounceTime(300),
+        distinctUntilChanged(),
+        takeUntilDestroyed(inject(DestroyRef)),
+      )
+      .subscribe((q) => {
+        this.api.customers
+          .getAll({ search: q || undefined })
+          .then((r) => this.customers.set(r.data));
+      });
   }
 
   ngOnInit() {
@@ -120,7 +162,9 @@ export class NewPaymentComponent implements OnInit {
 
     const prefillId = this.route.snapshot.queryParamMap.get('customerId');
     if (prefillId) {
-      this.api.customers.getOne(prefillId).then((r) => this.selectedCustomer.set(r.data));
+      this.api.customers
+        .getOne(prefillId)
+        .then((r) => this.selectedCustomer.set(r.data));
     }
   }
 

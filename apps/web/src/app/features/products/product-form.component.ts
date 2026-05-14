@@ -48,7 +48,7 @@ export class ProductFormComponent implements OnInit {
 
   protected form: FormGroup = this.fb.group({
     name: ['', Validators.required],
-    price: [0, [Validators.required, Validators.min(0.01)]],
+    price: [0, [Validators.required, Validators.min(0)]],
     stockQuantity: [0, [Validators.min(0)]],
     unit: ['piece'],
     category: [''],

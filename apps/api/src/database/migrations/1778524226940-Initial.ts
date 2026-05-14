@@ -11,7 +11,7 @@ export class Initial1778524226940 implements MigrationInterface {
       CREATE TABLE "products" (
         "id" uuid NOT NULL DEFAULT gen_random_uuid(),
         "name" character varying NOT NULL,
-        "price" numeric(10,2) NOT NULL,
+        "price" numeric(10,3) NOT NULL,
         "stockQuantity" integer NOT NULL DEFAULT '0',
         "unit" character varying NOT NULL,
         "category" character varying,
@@ -25,7 +25,7 @@ export class Initial1778524226940 implements MigrationInterface {
         "id" uuid NOT NULL DEFAULT gen_random_uuid(),
         "name" character varying NOT NULL,
         "phone" character varying,
-        "totalDebt" numeric(10,2) NOT NULL DEFAULT '0',
+        "totalDebt" numeric(10,3) NOT NULL DEFAULT '0',
         "createdAt" TIMESTAMP NOT NULL DEFAULT now(),
         "updatedAt" TIMESTAMP NOT NULL DEFAULT now(),
         CONSTRAINT "PK_customers" PRIMARY KEY ("id")
@@ -36,7 +36,7 @@ export class Initial1778524226940 implements MigrationInterface {
         "id" uuid NOT NULL DEFAULT gen_random_uuid(),
         "customerId" uuid NOT NULL,
         "type" "public"."transactions_type_enum" NOT NULL,
-        "amount" numeric(10,2) NOT NULL,
+        "amount" numeric(10,3) NOT NULL,
         "note" character varying,
         "createdAt" TIMESTAMP NOT NULL DEFAULT now(),
         CONSTRAINT "PK_transactions" PRIMARY KEY ("id")
@@ -48,7 +48,7 @@ export class Initial1778524226940 implements MigrationInterface {
         "transactionId" uuid NOT NULL,
         "productId" uuid NOT NULL,
         "quantity" integer NOT NULL,
-        "unitPrice" numeric(10,2) NOT NULL,
+        "unitPrice" numeric(10,3) NOT NULL,
         CONSTRAINT "PK_transaction_items" PRIMARY KEY ("id")
       )
     `);

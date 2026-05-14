@@ -22,7 +22,7 @@ export class Customer {
   @Column({
     type: 'decimal',
     precision: 10,
-    scale: 2,
+    scale: 3,
     default: 0,
     transformer: {
       to: (value: number) => value,
