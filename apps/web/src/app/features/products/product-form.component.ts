@@ -15,8 +15,14 @@ import { ApiService } from '../../core/services/api.service';
   selector: 'app-product-form',
   standalone: true,
   imports: [
-    RouterLink, ReactiveFormsModule, MatButtonModule, MatInputModule,
-    MatSelectModule, MatFormFieldModule, MatCardModule, PageHeaderComponent,
+    RouterLink,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatInputModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatCardModule,
+    PageHeaderComponent,
   ],
   template: `
     <app-page-header [title]="isEdit() ? 'Edit Product' : 'New Product'">
@@ -28,8 +34,11 @@ import { ApiService } from '../../core/services/api.service';
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
           <mat-form-field appearance="outline" class="full-width mb-2">
             <mat-label>Name</mat-label>
-            <input matInput formControlName="name" placeholder="Product name">
-            @if (form.get('name')?.errors?.['required'] && form.get('name')?.touched) {
+            <input matInput formControlName="name" placeholder="Product name" />
+            @if (
+              form.get('name')?.errors?.['required'] &&
+              form.get('name')?.touched
+            ) {
               <mat-error>Name is required</mat-error>
             }
           </mat-form-field>
@@ -37,18 +46,31 @@ import { ApiService } from '../../core/services/api.service';
           <div style="display: flex; gap: 16px;">
             <mat-form-field appearance="outline" class="full-width mb-2">
               <mat-label>Price</mat-label>
-              <input matInput type="number" formControlName="price" placeholder="0.00">
-              @if (form.get('price')?.errors?.['required'] && form.get('price')?.touched) {
+              <input
+                matInput
+                type="number"
+                formControlName="price"
+                placeholder="0.00"
+              />
+              @if (
+                form.get('price')?.errors?.['required'] &&
+                form.get('price')?.touched
+              ) {
                 <mat-error>Price is required</mat-error>
               }
-              @if (form.get('price')?.errors?.['positive']) {
+              @if (form.get('price')?.errors?.['min']) {
                 <mat-error>Price must be positive</mat-error>
               }
             </mat-form-field>
 
             <mat-form-field appearance="outline" class="full-width mb-2">
               <mat-label>Stock Qty</mat-label>
-              <input matInput type="number" formControlName="stockQuantity" placeholder="0">
+              <input
+                matInput
+                type="number"
+                formControlName="stockQuantity"
+                placeholder="0"
+              />
               @if (form.get('stockQuantity')?.errors?.['min']) {
                 <mat-error>Min is 0</mat-error>
               }
@@ -69,13 +91,26 @@ import { ApiService } from '../../core/services/api.service';
 
             <mat-form-field appearance="outline" class="full-width mb-2">
               <mat-label>Category</mat-label>
-              <input matInput formControlName="category" placeholder="Category">
+              <input
+                matInput
+                formControlName="category"
+                placeholder="Category"
+              />
             </mat-form-field>
           </div>
 
-          <div style="display: flex; gap: 16px; justify-content: flex-end; margin-top: 16px;">
-            <button mat-button type="button" routerLink="/products">Cancel</button>
-            <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid || submitting()">
+          <div
+            style="display: flex; gap: 16px; justify-content: flex-end; margin-top: 16px;"
+          >
+            <button mat-button type="button" routerLink="/products">
+              Cancel
+            </button>
+            <button
+              mat-raised-button
+              color="primary"
+              type="submit"
+              [disabled]="form.invalid || submitting()"
+            >
               {{ isEdit() ? 'Update' : 'Create' }}
             </button>
           </div>
