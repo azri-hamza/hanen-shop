@@ -26,7 +26,17 @@ export class Transaction {
   @Column({ type: 'enum', enum: TransactionType })
   type: TransactionType;
 
-  @Column({ type: 'decimal', precision: 10, scale: 2, nullable: false })
+  @Column({
+    type: 'decimal',
+    precision: 10,
+    scale: 2,
+    nullable: false,
+    transformer: {
+      to: (value: number) => value,
+      from: (value: string | null) =>
+        value !== null ? parseFloat(value) : null,
+    },
+  })
   amount: number;
 
   @Column({ type: 'varchar', nullable: true })

@@ -19,7 +19,17 @@ export class Customer {
   @Column({ type: 'varchar', nullable: true })
   phone: string;
 
-  @Column({ type: 'decimal', precision: 10, scale: 2, default: 0 })
+  @Column({
+    type: 'decimal',
+    precision: 10,
+    scale: 2,
+    default: 0,
+    transformer: {
+      to: (value: number) => value,
+      from: (value: string | null) =>
+        value !== null ? parseFloat(value) : null,
+    },
+  })
   totalDebt: number;
 
   @CreateDateColumn()

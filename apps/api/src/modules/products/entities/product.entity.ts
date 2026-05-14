@@ -14,7 +14,17 @@ export class Product {
   @Column({ type: 'varchar', nullable: false })
   name: string;
 
-  @Column({ type: 'decimal', precision: 10, scale: 2, nullable: false })
+  @Column({
+    type: 'decimal',
+    precision: 10,
+    scale: 2,
+    nullable: false,
+    transformer: {
+      to: (value: number) => value,
+      from: (value: string | null) =>
+        value !== null ? parseFloat(value) : null,
+    },
+  })
   price: number;
 
   @Column({ type: 'int', default: 0 })
