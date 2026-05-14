@@ -1,7 +1,12 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, DestroyRef, OnInit, inject, signal } from '@angular/core';
 import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { Title } from '@angular/platform-browser';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -10,6 +15,8 @@ import { MatCardModule } from '@angular/material/card';
 import { PageHeaderComponent } from '../../shared/components/page-header/page-header.component';
 import { ToastService } from '../../core/services/toast.service';
 import { ApiService } from '../../core/services/api.service';
+import { of, switchMap } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-product-form',
@@ -33,6 +40,7 @@ export class ProductFormComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly toast = inject(ToastService);
   private readonly title = inject(Title);
+  private destroyRef = inject(DestroyRef);
 
   protected isEdit = signal(false);
   protected submitting = signal(false);
@@ -46,17 +54,30 @@ export class ProductFormComponent implements OnInit {
     category: [''],
   });
 
-  async ngOnInit() {
-    this.productId = this.route.snapshot.paramMap.get('id');
-    if (this.productId) {
-      this.isEdit.set(true);
-      try {
-        const res = await this.api.products.getOne(this.productId);
-        this.form.patchValue(res.data);
-      } catch {
-        this.toast.error('Failed to load product');
-      }
-    }
+  ngOnInit() {
+    this.route.paramMap
+      .pipe(
+        switchMap((params) => {
+          const id = params.get('id');
+          this.isEdit.set(!!id);
+          this.productId = id;
+          return id ? this.api.products.getOne(id) : of(null);
+        }),
+        takeUntilDestroyed(this.destroyRef),
+      )
+      .subscribe({
+        next: (res) => {
+          if (res) {
+            this.form.patchValue(res.data);
+            this.title.setTitle('Edit Product');
+          } else {
+            this.title.setTitle('Create Product');
+          }
+        },
+        error: () => {
+          this.toast.error('Failed to load product');
+        },
+      });
   }
 
   async onSubmit() {
