@@ -8,7 +8,10 @@ export class DashboardController {
   constructor(private readonly dashboardService: DashboardService) {}
 
   @Get('summary')
-  @ApiOperation({ summary: 'Get dashboard summary (low stock, top debtors, today revenue/payments)' })
+  @ApiOperation({
+    summary:
+      'Get dashboard summary (low stock, top debtors, today revenue/payments)',
+  })
   getSummary() {
     return this.dashboardService.getSummary();
   }

@@ -50,7 +50,10 @@ export class CustomersService {
     return this.customerRepo.save(customer);
   }
 
-  async recalculateDebt(customerId: string, queryRunner: QueryRunner): Promise<void> {
+  async recalculateDebt(
+    customerId: string,
+    queryRunner: QueryRunner,
+  ): Promise<void> {
     const result = await queryRunner.manager
       .createQueryBuilder()
       .select('COALESCE(SUM("amount"), 0)', 'total')

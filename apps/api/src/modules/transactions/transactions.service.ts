@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, DataSource } from 'typeorm';
 import { TransactionType } from '@hanen-shop/shared-types';
@@ -36,7 +40,9 @@ export class TransactionsService {
       });
 
       if (!customer) {
-        throw new NotFoundException(`Customer with id "${dto.customerId}" not found`);
+        throw new NotFoundException(
+          `Customer with id "${dto.customerId}" not found`,
+        );
       }
 
       const items: { product: Product; quantity: number }[] = [];
@@ -47,7 +53,9 @@ export class TransactionsService {
         });
 
         if (!product) {
-          throw new NotFoundException(`Product with id "${item.productId}" not found`);
+          throw new NotFoundException(
+            `Product with id "${item.productId}" not found`,
+          );
         }
 
         if (product.stockQuantity < item.quantity) {
@@ -111,7 +119,9 @@ export class TransactionsService {
       });
 
       if (!customer) {
-        throw new NotFoundException(`Customer with id "${dto.customerId}" not found`);
+        throw new NotFoundException(
+          `Customer with id "${dto.customerId}" not found`,
+        );
       }
 
       const transaction = await queryRunner.manager.save(Transaction, {

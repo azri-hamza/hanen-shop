@@ -19,7 +19,9 @@ export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
   @Get()
-  @ApiOperation({ summary: 'List all products with optional search and category filter' })
+  @ApiOperation({
+    summary: 'List all products with optional search and category filter',
+  })
   findAll(
     @Query('search') search?: string,
     @Query('category') category?: string,

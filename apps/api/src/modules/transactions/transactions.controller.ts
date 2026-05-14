@@ -22,7 +22,9 @@ export class TransactionsController {
   }
 
   @Get('customer/:customerId')
-  @ApiOperation({ summary: 'Get all transactions for a customer with items and product names' })
+  @ApiOperation({
+    summary: 'Get all transactions for a customer with items and product names',
+  })
   getCustomerLedger(@Param('customerId') customerId: string) {
     return this.transactionsService.getCustomerLedger(customerId);
   }

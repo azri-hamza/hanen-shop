@@ -24,7 +24,9 @@ export class DashboardService {
     });
 
     const lowStockThreshold = 5;
-    const lowStock = lowStockProducts.filter((p) => p.stockQuantity > 0 && p.stockQuantity <= lowStockThreshold);
+    const lowStock = lowStockProducts.filter(
+      (p) => p.stockQuantity > 0 && p.stockQuantity <= lowStockThreshold,
+    );
 
     const topDebtors = await this.customerRepo.find({
       order: { totalDebt: 'DESC' },
@@ -54,7 +56,10 @@ export class DashboardService {
       .getRawOne<{ total: string }>();
 
     return {
-      lowStockProducts: [...lowStock, ...lowStockProducts.filter((p) => p.stockQuantity === 0)],
+      lowStockProducts: [
+        ...lowStock,
+        ...lowStockProducts.filter((p) => p.stockQuantity === 0),
+      ],
       topDebtors,
       todayRevenue: parseFloat(todayRevenueResult?.total ?? '0'),
       todayPayments: parseFloat(todayPaymentsResult?.total ?? '0'),
