@@ -1,0 +1,90 @@
+<app-page-header [title]="isEdit() ? 'Edit Product' : 'New Product'">
+  <button mat-button routerLink="/products">Back</button>
+</app-page-header>
+
+<mat-card style="max-width: 600px">
+  <mat-card-content>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline" class="full-width mb-2">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" placeholder="Product name" />
+        @if (
+          form.get("name")?.errors?.["required"] && form.get("name")?.touched
+        ) {
+          <mat-error>Name is required</mat-error>
+        }
+      </mat-form-field>
+
+      <div style="display: flex; gap: 16px">
+        <mat-form-field appearance="outline" class="full-width mb-2">
+          <mat-label>Price</mat-label>
+          <input
+            matInput
+            type="number"
+            formControlName="price"
+            placeholder="0.00"
+          />
+          @if (
+            form.get("price")?.errors?.["required"] &&
+            form.get("price")?.touched
+          ) {
+            <mat-error>Price is required</mat-error>
+          }
+          @if (form.get("price")?.errors?.["min"]) {
+            <mat-error>Price must be positive</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width mb-2">
+          <mat-label>Stock Qty</mat-label>
+          <input
+            matInput
+            type="number"
+            formControlName="stockQuantity"
+            placeholder="0"
+          />
+          @if (form.get("stockQuantity")?.errors?.["min"]) {
+            <mat-error>Min is 0</mat-error>
+          }
+        </mat-form-field>
+      </div>
+
+      <div style="display: flex; gap: 16px">
+        <mat-form-field appearance="outline" class="full-width mb-2">
+          <mat-label>Unit</mat-label>
+          <mat-select formControlName="unit">
+            <mat-option value="piece">Piece</mat-option>
+            <mat-option value="kg">Kg</mat-option>
+            <mat-option value="litre">Litre</mat-option>
+            <mat-option value="box">Box</mat-option>
+            <mat-option value="pack">Pack</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width mb-2">
+          <mat-label>Category</mat-label>
+          <input matInput formControlName="category" placeholder="Category" />
+        </mat-form-field>
+      </div>
+
+      <div
+        style="
+          display: flex;
+          gap: 16px;
+          justify-content: flex-end;
+          margin-top: 16px;
+        "
+      >
+        <button mat-button type="button" routerLink="/products">Cancel</button>
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="form.invalid || submitting()"
+        >
+          {{ isEdit() ? "Update" : "Create" }}
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
