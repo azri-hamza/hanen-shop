@@ -12,19 +12,18 @@ import { ApiService, DashboardSummary } from '../../core/services/api.service';
 import { PageHeaderComponent } from '../../shared/components/page-header/page-header.component';
 
 @Component({
-  selector: 'app-dashboard',
-  standalone: true,
-  imports: [
-    RouterLink,
-    MatCardModule,
-    MatIconModule,
-    MatListModule,
-    MatChipsModule,
-    MatProgressBarModule,
-    DecimalPipe,
-    PageHeaderComponent,
-  ],
-  template: `
+    selector: 'app-dashboard',
+    imports: [
+        RouterLink,
+        MatCardModule,
+        MatIconModule,
+        MatListModule,
+        MatChipsModule,
+        MatProgressBarModule,
+        DecimalPipe,
+        PageHeaderComponent,
+    ],
+    template: `
     <app-page-header title="Dashboard" />
 
     @if (loading()) {
@@ -176,8 +175,8 @@ import { PageHeaderComponent } from '../../shared/components/page-header/page-he
       </div>
     }
   `,
-  styles: [
-    `
+    styles: [
+        `
       @keyframes pulse {
         0%,
         100% {
@@ -188,7 +187,7 @@ import { PageHeaderComponent } from '../../shared/components/page-header/page-he
         }
       }
     `,
-  ],
+    ]
 })
 export class DashboardComponent implements OnInit {
   private readonly api = inject(ApiService);

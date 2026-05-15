@@ -11,13 +11,12 @@ import { ToastService } from '../../core/services/toast.service';
 import { ApiService } from '../../core/services/api.service';
 
 @Component({
-  selector: 'app-customer-form',
-  standalone: true,
-  imports: [
-    RouterLink, ReactiveFormsModule, MatButtonModule, MatInputModule,
-    MatFormFieldModule, MatCardModule, PageHeaderComponent,
-  ],
-  template: `
+    selector: 'app-customer-form',
+    imports: [
+        RouterLink, ReactiveFormsModule, MatButtonModule, MatInputModule,
+        MatFormFieldModule, MatCardModule, PageHeaderComponent,
+    ],
+    template: `
     <app-page-header title="New Customer">
       <button mat-button routerLink="/customers">Back</button>
     </app-page-header>
@@ -47,7 +46,7 @@ import { ApiService } from '../../core/services/api.service';
         </form>
       </mat-card-content>
     </mat-card>
-  `,
+  `
 })
 export class CustomerFormComponent {
   private readonly fb = inject(FormBuilder);

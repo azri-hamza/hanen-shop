@@ -3,14 +3,13 @@ import { DecimalPipe } from '@angular/common';
 import { MatChipsModule } from '@angular/material/chips';
 
 @Component({
-  selector: 'app-debt-badge',
-  standalone: true,
-  imports: [MatChipsModule, DecimalPipe],
-  template: `
+    selector: 'app-debt-badge',
+    imports: [MatChipsModule, DecimalPipe],
+    template: `
     <mat-chip [color]="color()" highlighted="false">
       {{ value | number: '1.3-3' }}
     </mat-chip>
-  `,
+  `
 })
 export class DebtBadgeComponent {
   @Input({ required: true }) value!: number;

@@ -19,19 +19,18 @@ import { of, switchMap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
-  selector: 'app-product-form',
-  standalone: true,
-  imports: [
-    RouterLink,
-    ReactiveFormsModule,
-    MatButtonModule,
-    MatInputModule,
-    MatSelectModule,
-    MatFormFieldModule,
-    MatCardModule,
-    PageHeaderComponent,
-  ],
-  templateUrl: 'product-form.component.html',
+    selector: 'app-product-form',
+    imports: [
+        RouterLink,
+        ReactiveFormsModule,
+        MatButtonModule,
+        MatInputModule,
+        MatSelectModule,
+        MatFormFieldModule,
+        MatCardModule,
+        PageHeaderComponent,
+    ],
+    templateUrl: 'product-form.component.html'
 })
 export class ProductFormComponent implements OnInit {
   private readonly fb = inject(FormBuilder);

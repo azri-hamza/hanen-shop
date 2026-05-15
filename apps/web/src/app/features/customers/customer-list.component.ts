@@ -15,14 +15,13 @@ import { DebtBadgeComponent } from '../../shared/components/debt-badge/debt-badg
 import { EmptyStateComponent } from '../../shared/components/empty-state/empty-state.component';
 
 @Component({
-  selector: 'app-customer-list',
-  standalone: true,
-  imports: [
-    RouterLink, MatTableModule, MatButtonModule, MatIconModule,
-    MatInputModule, MatFormFieldModule, MatProgressBarModule,
-    PageHeaderComponent, DebtBadgeComponent, EmptyStateComponent,
-  ],
-  template: `
+    selector: 'app-customer-list',
+    imports: [
+        RouterLink, MatTableModule, MatButtonModule, MatIconModule,
+        MatInputModule, MatFormFieldModule, MatProgressBarModule,
+        PageHeaderComponent, DebtBadgeComponent, EmptyStateComponent,
+    ],
+    template: `
     <app-page-header title="Customers">
       <button mat-raised-button color="primary" routerLink="/customers/new">
         <mat-icon>add</mat-icon> New Customer
@@ -81,12 +80,12 @@ import { EmptyStateComponent } from '../../shared/components/empty-state/empty-s
       </mat-table>
     }
   `,
-  styles: [`
+    styles: [`
     @keyframes pulse {
       0%, 100% { opacity: 0.4; }
       50% { opacity: 1; }
     }
-  `],
+  `]
 })
 export class CustomerListComponent implements OnInit {
   protected readonly store = inject(CustomersStore);

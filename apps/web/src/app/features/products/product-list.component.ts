@@ -20,22 +20,21 @@ import { ConfirmDialogComponent, ConfirmDialogData } from '../../shared/componen
 import { ToastService } from '../../core/services/toast.service';
 
 @Component({
-  selector: 'app-product-list',
-  standalone: true,
-  imports: [
-    RouterLink,
-    MatTableModule,
-    MatButtonModule,
-    MatIconModule,
-    MatInputModule,
-    MatSelectModule,
-    MatFormFieldModule,
-    MatProgressBarModule,
-    DecimalPipe,
-    PageHeaderComponent,
-    EmptyStateComponent,
-  ],
-  template: `
+    selector: 'app-product-list',
+    imports: [
+        RouterLink,
+        MatTableModule,
+        MatButtonModule,
+        MatIconModule,
+        MatInputModule,
+        MatSelectModule,
+        MatFormFieldModule,
+        MatProgressBarModule,
+        DecimalPipe,
+        PageHeaderComponent,
+        EmptyStateComponent,
+    ],
+    template: `
     <app-page-header title="Products">
       <button mat-raised-button color="primary" routerLink="/products/new">
         <mat-icon>add</mat-icon> New Product
@@ -149,8 +148,8 @@ import { ToastService } from '../../core/services/toast.service';
       </mat-table>
     }
   `,
-  styles: [
-    `
+    styles: [
+        `
       @keyframes pulse {
         0%,
         100% {
@@ -161,7 +160,7 @@ import { ToastService } from '../../core/services/toast.service';
         }
       }
     `,
-  ],
+    ]
 })
 export class ProductListComponent implements OnInit {
   protected readonly store = inject(ProductsStore);

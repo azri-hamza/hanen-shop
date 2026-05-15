@@ -20,23 +20,22 @@ interface TransactionWithBalance extends ITransaction {
 }
 
 @Component({
-  selector: 'app-customer-detail',
-  standalone: true,
-  imports: [
-    RouterLink,
-    DatePipe,
-    DecimalPipe,
-    MatButtonModule,
-    MatIconModule,
-    MatCardModule,
-    MatChipsModule,
-    MatExpansionModule,
-    MatDividerModule,
-    MatProgressBarModule,
-    PageHeaderComponent,
-    EmptyStateComponent,
-  ],
-  template: `
+    selector: 'app-customer-detail',
+    imports: [
+        RouterLink,
+        DatePipe,
+        DecimalPipe,
+        MatButtonModule,
+        MatIconModule,
+        MatCardModule,
+        MatChipsModule,
+        MatExpansionModule,
+        MatDividerModule,
+        MatProgressBarModule,
+        PageHeaderComponent,
+        EmptyStateComponent,
+    ],
+    template: `
     @if (store.loading()) {
       <mat-progress-bar mode="indeterminate" style="margin-bottom: 16px;" />
       <mat-card>
@@ -175,8 +174,8 @@ interface TransactionWithBalance extends ITransaction {
       }
     }
   `,
-  styles: [
-    `
+    styles: [
+        `
       @keyframes pulse {
         0%,
         100% {
@@ -187,7 +186,7 @@ interface TransactionWithBalance extends ITransaction {
         }
       }
     `,
-  ],
+    ]
 })
 export class CustomerDetailComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);

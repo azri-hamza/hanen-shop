@@ -24,23 +24,22 @@ interface SaleItem {
 }
 
 @Component({
-  selector: 'app-new-sale',
-  standalone: true,
-  imports: [
-    RouterLink,
-    FormsModule,
-    DecimalPipe,
-    MatButtonModule,
-    MatIconModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatAutocompleteModule,
-    MatCardModule,
-    MatChipsModule,
-    MatListModule,
-    PageHeaderComponent,
-  ],
-  template: `
+    selector: 'app-new-sale',
+    imports: [
+        RouterLink,
+        FormsModule,
+        DecimalPipe,
+        MatButtonModule,
+        MatIconModule,
+        MatInputModule,
+        MatFormFieldModule,
+        MatAutocompleteModule,
+        MatCardModule,
+        MatChipsModule,
+        MatListModule,
+        PageHeaderComponent,
+    ],
+    template: `
     <app-page-header title="New Sale">
       <button mat-button routerLink="/dashboard">Back</button>
     </app-page-header>
@@ -168,7 +167,7 @@ interface SaleItem {
         }
       </mat-card-content>
     </mat-card>
-  `,
+  `
 })
 export class NewSaleComponent implements OnInit {
   private readonly api = inject(ApiService);

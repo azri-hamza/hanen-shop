@@ -6,17 +6,16 @@ import { MatIconModule } from '@angular/material/icon';
 import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
-  selector: 'app-shell',
-  standalone: true,
-  imports: [
-    MatSidenavModule,
-    MatListModule,
-    MatIconModule,
-    NavbarComponent,
-    RouterLink,
-    RouterLinkActive,
-  ],
-  template: `
+    selector: 'app-shell',
+    imports: [
+        MatSidenavModule,
+        MatListModule,
+        MatIconModule,
+        NavbarComponent,
+        RouterLink,
+        RouterLinkActive,
+    ],
+    template: `
     <mat-drawer-container class="sidenav-container" autosize>
       <mat-drawer #drawer class="sidenav" mode="over" [opened]="drawerOpen()">
         <mat-nav-list>
@@ -71,7 +70,7 @@ import { NavbarComponent } from '../navbar/navbar.component';
         </main>
       </mat-drawer-content>
     </mat-drawer-container>
-  `,
+  `
 })
 export class ShellComponent {
   protected drawerOpen = signal(false);

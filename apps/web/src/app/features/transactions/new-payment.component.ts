@@ -18,22 +18,21 @@ import { PageHeaderComponent } from '../../shared/components/page-header/page-he
 import { ToastService } from '../../core/services/toast.service';
 
 @Component({
-  selector: 'app-new-payment',
-  standalone: true,
-  imports: [
-    RouterLink,
-    FormsModule,
-    DecimalPipe,
-    MatButtonModule,
-    MatIconModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatAutocompleteModule,
-    MatCardModule,
-    MatChipsModule,
-    PageHeaderComponent,
-  ],
-  template: `
+    selector: 'app-new-payment',
+    imports: [
+        RouterLink,
+        FormsModule,
+        DecimalPipe,
+        MatButtonModule,
+        MatIconModule,
+        MatInputModule,
+        MatFormFieldModule,
+        MatAutocompleteModule,
+        MatCardModule,
+        MatChipsModule,
+        PageHeaderComponent,
+    ],
+    template: `
     <app-page-header title="New Payment">
       <button mat-button routerLink="/dashboard">Back</button>
     </app-page-header>
@@ -112,7 +111,7 @@ import { ToastService } from '../../core/services/toast.service';
         }
       </mat-card-content>
     </mat-card>
-  `,
+  `
 })
 export class NewPaymentComponent implements OnInit {
   private readonly api = inject(ApiService);

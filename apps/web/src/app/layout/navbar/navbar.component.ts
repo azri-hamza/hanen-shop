@@ -5,10 +5,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { TopLoadingBarComponent } from '../../shared/components/top-loading-bar/top-loading-bar.component';
 
 @Component({
-  selector: 'app-navbar',
-  standalone: true,
-  imports: [MatToolbarModule, MatButtonModule, MatIconModule, TopLoadingBarComponent],
-  template: `
+    selector: 'app-navbar',
+    imports: [MatToolbarModule, MatButtonModule, MatIconModule, TopLoadingBarComponent],
+    template: `
     <app-top-loading-bar />
     <mat-toolbar color="primary">
       <button mat-icon-button (click)="toggle.emit()">
@@ -16,7 +15,7 @@ import { TopLoadingBarComponent } from '../../shared/components/top-loading-bar/
       </button>
       <span>hanen-shop</span>
     </mat-toolbar>
-  `,
+  `
 })
 export class NavbarComponent {
   readonly toggle = output<void>();
